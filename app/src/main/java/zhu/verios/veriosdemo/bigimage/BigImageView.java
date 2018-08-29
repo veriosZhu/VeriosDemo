@@ -19,11 +19,16 @@ import java.io.InputStream;
  * Copyright (C) 2018 Phicomm.
  */
 public class BigImageView extends View {
+    private static final String TAG = "BigImageView";
 
     private BitmapRegionDecoder mDecoder;
     private int mImgWidth, mImgHeight;
     private BitmapFactory.Options mOptions;
     private Rect mRect;
+
+    float mDownX, mDownY;
+    int mDownRectLeft, mDownRectTop;
+    int mViewHeight, mViewWidth;
 
 
     public BigImageView(Context context) {
@@ -73,17 +78,18 @@ public class BigImageView extends View {
         mRect.right = width;
         mRect.top = 0;
         mRect.bottom = height;
+        mViewHeight = height;
+        mViewWidth = width;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         if (mDecoder != null) {
+//            Log.i(TAG, "onDraw: " + mRect.left + "," + mRect.right + "," + mRect.top + "," + mRect.bottom);
             Bitmap bitmap = mDecoder.decodeRegion(mRect, mOptions);
             canvas.drawBitmap(bitmap, 0, 0, null);
         }
     }
-
-    float mDownX, mDownY;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -92,25 +98,55 @@ public class BigImageView extends View {
             case MotionEvent.ACTION_DOWN:
                 mDownX = event.getX();
                 mDownY = event.getY();
+                mDownRectLeft = mRect.left;
+                mDownRectTop = mRect.top;
                 break;
             case MotionEvent.ACTION_MOVE:
                 float x = event.getX();
                 float y = event.getY();
-                mRect.offset(getMove(mRect.left, mRect.right, x - mDownX), getMove(mRect.top, mRect.bottom, y - mDownY));
+//                mRect.offset(getMove(mRect.left, mRect.right, -(x - mDownX), mImgWidth),
+//                        getMove(mRect.top, mRect.bottom, -(y - mDownY), mImgHeight));
+//                mDownX = x;
+//                mDownY = y;
+                move((int)(mDownX - x), (int)(mDownY - y));
                 invalidate();
             default:
         }
             return true;
     }
 
-    private int getMove(int lowBound, int highBound , float move) {
-        if (highBound + move > mImgWidth) {
-            return mImgWidth - highBound;
-        } else if (lowBound + move < 0) {
-            return lowBound;
+    private int getMove(int floor, int ceil , float move, int bound) {
+        if (ceil + move > bound) {
+            return bound - ceil;
+        } else if (floor + move < 0) {
+            return 0;
         } else {
             return (int)move;
         }
+    }
+
+    private void move(int moveX, int moveY) {
+        int left = 0, top = 0;
+        if (mImgWidth > mViewWidth) {
+            if (mDownRectLeft + moveX <= 0) {
+                left = 0;
+            } else if (mDownRectLeft + mViewWidth + moveX > mImgWidth) {
+                left = mImgWidth - mViewWidth;
+            } else {
+                left = mDownRectLeft + moveX;
+            }
+        }
+
+        if (mImgHeight > mViewHeight) {
+            if (mDownRectTop + moveY <= 0) {
+                top = 0;
+            } else if (mDownRectTop + mViewHeight + moveY > mImgHeight) {
+                top = mImgHeight - mViewHeight;
+            } else {
+                top = mDownRectTop + moveY;
+            }
+        }
+        mRect.set(left, top, left + mViewWidth, top + mViewHeight);
     }
 
 }
