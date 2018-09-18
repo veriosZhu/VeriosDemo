@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import zhu.verios.veriosdemo.bigimage.BigImageActivity;
+import zhu.verios.veriosdemo.scrollviewex.ScrollViewExActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_big_image:
             startActivity(new Intent(this, BigImageActivity.class));
             break;
+            case R.id.btn_custom_viewgroup:
+                startActivity(new Intent(this, ScrollViewExActivity.class));
+                break;
             default:
         }
     }

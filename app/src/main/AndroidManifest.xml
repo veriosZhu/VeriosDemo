@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bigimage.BigImageActivity"></activity>
+        <activity android:name=".bigimage.BigImageActivity" />
+        <activity android:name=".scrollviewex.ScrollViewExActivity"></activity>
     </application>
 
 </manifest>
