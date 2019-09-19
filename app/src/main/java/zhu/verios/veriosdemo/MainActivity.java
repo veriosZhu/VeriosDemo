@@ -1,9 +1,10 @@
 package zhu.verios.veriosdemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import zhu.verios.veriosdemo.bigimage.BigImageActivity;
 import zhu.verios.veriosdemo.scrollviewex.ScrollViewExActivity;
