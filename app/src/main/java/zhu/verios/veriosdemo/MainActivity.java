@@ -1,12 +1,15 @@
 package zhu.verios.veriosdemo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import zhu.verios.veriosdemo.bigimage.BigImageActivity;
+import zhu.verios.veriosdemo.camera.TakePhotoActivity;
 import zhu.verios.veriosdemo.scrollviewex.ScrollViewExActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_custom_viewgroup:
                 startActivity(new Intent(this, ScrollViewExActivity.class));
                 break;
+            case R.id.btn_take_photo:
+                startActivity(new Intent(this, TakePhotoActivity.class));
             default:
         }
     }

@@ -25,4 +25,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_big_image"/>
 
+    <Button
+        android:id="@+id/btn_take_photo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="拍照"
+        android:onClick="onClick"
+        app:layout_constraintTop_toBottomOf="@id/btn_custom_viewgroup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
