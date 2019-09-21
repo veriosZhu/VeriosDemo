@@ -4,7 +4,10 @@
 
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +25,7 @@
         <activity android:name=".bigimage.BigImageActivity" />
         <activity android:name=".scrollviewex.ScrollViewExActivity"/>
         <activity android:name=".camera.TakePhotoActivity"/>
-
+        <activity android:name=".camera.CameraActivity"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="zhu.verios.veriosdemo.fileprovider"
